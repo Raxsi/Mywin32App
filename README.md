@@ -13,31 +13,17 @@ Open the solution in Visual Studio and build.
 ## Next Steps
 - Add controls (buttons, edit boxes) in dialogs
 - Handle user input
-- Expand to MFC-like structure
-## 📂 Project Structure
-WindowsBasicApp/
-│
-├── src/ # Source files (.cpp)
-│├── main.cpp # Entry point (WinMain)
-│├── MyDialog.cpp # Dialog proc
-│└── resource.h # Resource IDs
-│
-├── include/ # Header files
-│ └── MyDialog.h
-│
-├── res/ # Resources (RC, icons, manifests)
-│ ├── WindowsBasicApp.rc
-│ ├── app.ico
-│ └── dialogs.rc
-│
-├── build/ # Build output (ignored in git)
-│
-├── WindowsBasicApp.sln # Visual Studio solution
-├── .gitignore
-└── README.md
 
+---
 
+## ⚙️ Build Instructions
+1. Open **WindowsBasicApp.sln** in Visual Studio.
+2. Build in **Debug** or **Release** mode.
+3. Run the generated `.exe` from the `build/` directory.
 
+---
 
-yaml
-Copy code
+## 🚀 Next Steps
+- Add buttons and edit controls inside dialogs
+- Handle WM_COMMAND messages for dialog input
+- Add icons, accelerators, and toolbar
