@@ -1,0 +1,41 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+Debug/
+Release/
+x64/
+x86/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+*.log
+
+# Compiler intermediates
+*.obj
+*.pdb
+*.idb
+*.ipch
+*.tlog
+*.pch
+
+# Others
+*.exe
+*.dll
+*.lib
+*.ilk
+
+# OS files
+Thumbs.db
+Desktop.ini
+WindowsBasicApp/.vs/WindowsBasicApp/v17/.suo
+WindowsBasicApp/.vs/WindowsBasicApp/v17/.suo
+WindowsBasicApp/WindowsBasicApp/x64/Release/WindowsBasicApp.tlog/rc.read.1.tlog
+WindowsBasicApp/WindowsBasicApp/x64/Release/WindowsBasicApp.log
+WindowsBasicApp/WindowsBasicApp/x64/Release/WindowsBasicApp.exe.recipe
+WindowsBasicApp/.vs/WindowsBasicApp/v17/Browse.VC.db-wal
+WindowsBasicApp/.vs/WindowsBasicApp/v17/Browse.VC.db-shm

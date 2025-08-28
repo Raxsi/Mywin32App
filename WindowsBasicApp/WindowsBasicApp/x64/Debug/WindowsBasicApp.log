@@ -1,2 +1,3 @@
 ﻿  WindowsBasicApp.cpp
-  WindowsBasicApp.vcxproj -> C:\Users\sheno\source\repos\WindowsBasicApp\x64\Debug\WindowsBasicApp.exe
+E:\Git-Repo\Mywin32App\WindowsBasicApp\WindowsBasicApp.cpp(171,70): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  WindowsBasicApp.vcxproj -> E:\Git-Repo\Mywin32App\WindowsBasicApp\x64\Debug\WindowsBasicApp.exe

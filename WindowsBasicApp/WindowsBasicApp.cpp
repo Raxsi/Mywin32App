@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "WindowsBasicApp.h"
+#include <afxwin.h>
 
 #define MAX_LOADSTRING 100
 
@@ -143,7 +144,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_EDIT_MODELESS:
                 if (hModelessDlg == NULL) // create only once
                 {
-                    hModelessDlg = CreateDialog(hInst, MAKEINTRESOURCE(IDD_MYDIALOG),hWnd, MyModeless); // About is dialog proc
+                    hModelessDlg = CreateDialog(hInst, MAKEINTRESOURCE(IDD_WINDOWSBASICAPP_DIALOG),hWnd, MyModeless); // About is dialog proc
                     ShowWindow(hModelessDlg, SW_SHOW);
                     OutputDebugStringA("Modeless Dialog Created\n");
                 }
@@ -194,6 +195,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_LBUTTONDOWN:
         OutputDebugStringA("Left Mouse Button Down\n");
         break;
+        
     case WM_RBUTTONDOWN:
         OutputDebugStringA("Right Mouse Button Down\n");
         break;
@@ -237,17 +239,39 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
-
 //MyModeless Window
 INT_PTR CALLBACK MyModeless(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
     case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+        //if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+        if(LOWORD(wParam) == IDCANCEL)
         {
             ShowWindow(hDlg, SW_HIDE);  // just hide instead of destroy
             return (INT_PTR)TRUE;
+        }
+        if (HIWORD(wParam) == BN_CLICKED && LOWORD(wParam) == IDOK)
+        {
+            wchar_t buffer[256];
+            GetDlgItemText(hModelessDlg, IDC_EDIT_NAME, buffer, 256);
+
+            wchar_t msg[300];
+            wsprintf(msg, L"Hello, %s!", buffer);
+
+            MessageBox(hDlg, msg, L"Greeting", MB_OK);
+        }
+    break;
+    case WM_LBUTTONDOWN:
+        if (hModelessDlg != NULL && IsWindowVisible(hModelessDlg))
+        {
+            //wchar_t buffer[256];
+            //GetDlgItemText(hModelessDlg, IDC_EDIT_NAME, buffer, 256);
+
+            //wchar_t msg[300];
+            //wsprintf(msg, L"Hello, %s!", buffer);
+
+            //MessageBox(hDlg, msg, L"Greeting", MB_OK);
         }
         break;
     }
