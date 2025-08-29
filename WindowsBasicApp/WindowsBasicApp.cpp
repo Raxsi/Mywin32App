@@ -244,6 +244,28 @@ INT_PTR CALLBACK MyModeless(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
 {
     switch (message)
     {
+      case WM_INITDIALOG:
+        {
+            HWND hList = GetDlgItem(hDlg, IDC_LIST2);
+
+            // Add ages from 18 to 35 (inclusive) in steps of 5
+            for (int age = 18; age <= 35; age += 1) {
+                wchar_t buffer[10];
+                wsprintf(buffer, L"%d", age);  // Convert integer to string
+                SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)buffer);
+            }
+
+            // Add Gender
+            HWND hGenderList = GetDlgItem(hDlg, IDC_LIST1);
+            SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Male");
+            SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Female");
+            SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Other");
+
+            return TRUE;
+
+
+        }
+        break;
     case WM_COMMAND:
         //if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
         if(LOWORD(wParam) == IDCANCEL)
@@ -255,25 +277,24 @@ INT_PTR CALLBACK MyModeless(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
         {
             wchar_t buffer[256];
             GetDlgItemText(hModelessDlg, IDC_EDIT_NAME, buffer, 256);
+            
+            //Age
+            int selectAgeIndex = (int)SendDlgItemMessage(hModelessDlg, IDC_LIST2, LB_GETCURSEL, 0, 0);
+            wchar_t age[100];
+            SendDlgItemMessage(hModelessDlg, IDC_LIST2, LB_GETTEXT, selectAgeIndex, (LPARAM)age);
 
+            //Gender
+            int selectGenderIndex = (int)SendDlgItemMessage(hModelessDlg, IDC_LIST1, LB_GETCURSEL, 0, 0);
+            wchar_t gender[100];
+            SendDlgItemMessage(hModelessDlg, IDC_LIST1, LB_GETTEXT, selectGenderIndex, (LPARAM)gender);
+
+            //message
             wchar_t msg[300];
-            wsprintf(msg, L"Hello, %s!", buffer);
+            wsprintf(msg, L"Hello, %s!\n Your age is %s \n Your gender is %s ", buffer,age,gender);
 
             MessageBox(hDlg, msg, L"Greeting", MB_OK);
         }
     break;
-    case WM_LBUTTONDOWN:
-        if (hModelessDlg != NULL && IsWindowVisible(hModelessDlg))
-        {
-            //wchar_t buffer[256];
-            //GetDlgItemText(hModelessDlg, IDC_EDIT_NAME, buffer, 256);
-
-            //wchar_t msg[300];
-            //wsprintf(msg, L"Hello, %s!", buffer);
-
-            //MessageBox(hDlg, msg, L"Greeting", MB_OK);
-        }
-        break;
     }
     return (INT_PTR)FALSE;
 }
