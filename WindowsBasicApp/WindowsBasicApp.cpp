@@ -255,12 +255,14 @@ INT_PTR CALLBACK MyModeless(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
                 SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)buffer);
             }
 
-            // Add Gender
+            // Add Gender combo box
             HWND hGenderList = GetDlgItem(hDlg, IDC_LIST1);
-            SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Male");
+           /* SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Male");
             SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Female");
             SendMessage(hGenderList, LB_ADDSTRING, 0, (LPARAM)L"Other");
+            */
 
+            
             return TRUE;
 
 
@@ -284,13 +286,37 @@ INT_PTR CALLBACK MyModeless(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
             SendDlgItemMessage(hModelessDlg, IDC_LIST2, LB_GETTEXT, selectAgeIndex, (LPARAM)age);
 
             //Gender
-            int selectGenderIndex = (int)SendDlgItemMessage(hModelessDlg, IDC_LIST1, LB_GETCURSEL, 0, 0);
-            wchar_t gender[100];
-            SendDlgItemMessage(hModelessDlg, IDC_LIST1, LB_GETTEXT, selectGenderIndex, (LPARAM)gender);
+           // int selectGenderIndex = (int)SendDlgItemMessage(hModelessDlg, IDC_LIST1, LB_GETCURSEL, 0, 0);
+           // wchar_t gender[100];
+            //SendDlgItemMessage(hModelessDlg, IDC_LIST1, LB_GETTEXT, selectGenderIndex, (LPARAM)gender);
+
+
+
+            //radio button gender
+            int gender = -1;
+            if (IsDlgButtonChecked(hDlg, IDC_RADIO1) == BST_CHECKED)
+                gender = 0;
+            else if (IsDlgButtonChecked(hDlg, IDC_RADIO2) == BST_CHECKED)
+                gender = 1;
+            else if (IsDlgButtonChecked(hDlg, IDC_RADIO3) == BST_CHECKED)
+                gender = 2;
+
+            const wchar_t* genderStr = L"Unknown";
+            switch (gender) {
+            case 0:
+                genderStr = L"Male";
+                break;
+            case 1:
+                genderStr = L"Female";
+                break;
+            case 2:
+                genderStr = L"Other";
+                break;
+            }
 
             //message
             wchar_t msg[300];
-            wsprintf(msg, L"Hello, %s!\n Your age is %s \n Your gender is %s ", buffer,age,gender);
+            wsprintf(msg, L"Hello, %s!\n Your age is %s \n Your gender is %s ", buffer,age, genderStr);
 
             MessageBox(hDlg, msg, L"Greeting", MB_OK);
         }
